@@ -1,0 +1,21 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/*canvas {
+  display: block;
+}*/
+
+#sketch-holder canvas {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid black;
+}
+
+button {
+  font-size: 20px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 10px 20px !important;
+}
