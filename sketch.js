@@ -1,4 +1,4 @@
-let sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8, sound9, sound10, sound11, sound12;
+let sounds = [];
 let questionButton, answerButton, nextButton;
 let player, fileName;
 let answerRevealed = false;
@@ -7,19 +7,23 @@ let answerRevealed = false;
 let lastChoice = -1;
 let secondLastChoice = -1;
 
+// list of file names
+const files = [
+  "Bb4 AM Saw.mp3", "Bb4 AM Sin.mp3", "Bb4 AM Sq.mp3",
+  "Bb4 AM Sweep Saw.mp3", "Bb4 AM Sweep Sin.mp3", "Bb4 AM Sweep Sq.mp3", "Bb4 AM Sweep Tri.mp3", "Bb4 AM Tri.mp3",
+  "C3 AM Saw.mp3", "C3 AM Sin.mp3", "C3 AM Sq.mp3",
+  "C3 AM Sweep Saw.mp3", "C3 AM Sweep Sin.mp3", "C3 AM Sweep Sq.mp3", "C3 AM Sweep Tri.mp3", "C3 AM Tri.mp3",
+  "D1 AM Saw.mp3", "D1 AM Sin.mp3", "D1 AM Sq.mp3",
+  "D1 AM Sweep Saw.mp3", "D1 AM Sweep Sin.mp3", "D1 AM Sweep Sq.mp3", "D1 AM Sweep Tri.mp3", "D1 AM Tri.mp3",
+  "Bb4 FM Saw.mp3", "Bb4 FM Sin.mp3", "Bb4 FM Sweep Saw.mp3", "Bb4 FM Sweep Sin.mp3", "Bb4 FM Sweep Tri.mp3", "Bb4 FM Tri.mp3",
+  "C3 FM Saw.mp3", "C3 FM Sin.mp3", "C3 FM Sweep Saw.mp3", "C3 FM Sweep Sin.mp3", "C3 FM Sweep Tri.mp3", "C3 FM Tri.mp3",
+  "D1 FM Saw.mp3", "D1 FM Sin.mp3", "D1 FM Sweep Saw.mp3", "D1 FM Sweep Sin.mp3", "D1 FM Sweep Tri.mp3", "D1 FM Tri.mp3"
+];
+
 function preload() {
-  sound1  = loadSound('assets/Bb4 Saw.mp3');
-  sound2  = loadSound('assets/Bb4 Sine.mp3');
-  sound3  = loadSound('assets/Bb4 Sq.mp3');
-  sound4  = loadSound('assets/Bb4 Tri.mp3');
-  sound5  = loadSound('assets/C3 Saw.mp3');
-  sound6  = loadSound('assets/C3 Sin.mp3');
-  sound7  = loadSound('assets/C3 Sq.mp3');
-  sound8  = loadSound('assets/C3 Tri.mp3');
-  sound9  = loadSound('assets/D1 Saw.mp3');
-  sound10 = loadSound('assets/D1 Sine.mp3');
-  sound11 = loadSound('assets/D1 Sq.mp3');
-  sound12 = loadSound('assets/D1 Tri.mp3');
+  for (let i = 0; i < files.length; i++) {
+    sounds[i] = loadSound('assets/' + files[i]);
+  }
 }
 
 function setup() {
@@ -30,11 +34,11 @@ function setup() {
 
   // Title
   textSize(36);
-  text("Basic Waveform Practice", width/2, height/9);
+  text("Waveform AM/FM Practice", width/2, height/9);
 
   // Subtitle
   textSize(20);
-  text("Sine, Triangle, Sawtooth, Square", width/2, height/9 + 40);
+  text("AM = Amplitude Modulation, FM = Frequency Modulation", width/2, height/9 + 40);
 
   // Layout variables
   let rowH = 60;
@@ -115,22 +119,16 @@ function nextQuestion() {
 function chooseSound() {
   let choice;
   do {
-    choice = int(random(12));
+    choice = int(random(sounds.length));
   } while (choice === lastChoice && choice === secondLastChoice);
 
   secondLastChoice = lastChoice;
   lastChoice = choice;
 
-  if (choice === 0)  { player = sound1;  fileName = "Sawtooth"; }
-  else if (choice === 1)  { player = sound2;  fileName = "Sine"; }
-  else if (choice === 2)  { player = sound3;  fileName = "Square"; }
-  else if (choice === 3)  { player = sound4;  fileName = "Triangle"; }
-  else if (choice === 4)  { player = sound5;  fileName = "Sawtooth"; }
-  else if (choice === 5)  { player = sound6;  fileName = "Sine"; }
-  else if (choice === 6)  { player = sound7;  fileName = "Square"; }
-  else if (choice === 7)  { player = sound8;  fileName = "Triangle"; }
-  else if (choice === 8)  { player = sound9;  fileName = "Sawtooth"; }
-  else if (choice === 9)  { player = sound10; fileName = "Sine"; }
-  else if (choice === 10) { player = sound11; fileName = "Square"; }
-  else { player = sound12; fileName = "Triangle"; }
+  player = sounds[choice];
+
+  // Set fileName to AM or FM based on the filename
+  if (files[choice].includes("AM")) fileName = "AM";
+  else if (files[choice].includes("FM")) fileName = "FM";
+  else fileName = "Unknown";
 }
