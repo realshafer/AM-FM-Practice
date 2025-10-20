@@ -37,11 +37,11 @@ function setup() {
 
   // Title
   textSize(36);
-  text("Waveform AM/FM/PWM Practice", width/2, height/9);
+  text("Modulation Synthesis Practice", width/2, height/9);
 
   // Subtitle
   textSize(20);
-  text("AM = Amplitude Modulation, FM = Frequency Modulation, PWM = Pulse Width Modulation", width/2, height/9 + 40);
+  text("Amplitude Modulation (AM), Frequency Modulation (FM), Pulse Width Modulation (PWM)", width/2, height/9 + 40);
 
   // Layout variables
   let rowH = 60;
