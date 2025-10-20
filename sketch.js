@@ -7,7 +7,7 @@ let answerRevealed = false;
 let lastChoice = -1;
 let secondLastChoice = -1;
 
-// list of file names
+// list of file names (AM, FM, PWM)
 const files = [
   "Bb4 AM Saw.mp3", "Bb4 AM Sin.mp3", "Bb4 AM Sq.mp3",
   "Bb4 AM Sweep Saw.mp3", "Bb4 AM Sweep Sin.mp3", "Bb4 AM Sweep Sq.mp3", "Bb4 AM Sweep Tri.mp3", "Bb4 AM Tri.mp3",
@@ -17,7 +17,10 @@ const files = [
   "D1 AM Sweep Saw.mp3", "D1 AM Sweep Sin.mp3", "D1 AM Sweep Sq.mp3", "D1 AM Sweep Tri.mp3", "D1 AM Tri.mp3",
   "Bb4 FM Saw.mp3", "Bb4 FM Sin.mp3", "Bb4 FM Sweep Saw.mp3", "Bb4 FM Sweep Sin.mp3", "Bb4 FM Sweep Tri.mp3", "Bb4 FM Tri.mp3",
   "C3 FM Saw.mp3", "C3 FM Sin.mp3", "C3 FM Sweep Saw.mp3", "C3 FM Sweep Sin.mp3", "C3 FM Sweep Tri.mp3", "C3 FM Tri.mp3",
-  "D1 FM Saw.mp3", "D1 FM Sin.mp3", "D1 FM Sweep Saw.mp3", "D1 FM Sweep Sin.mp3", "D1 FM Sweep Tri.mp3", "D1 FM Tri.mp3"
+  "D1 FM Saw.mp3", "D1 FM Sin.mp3", "D1 FM Sweep Saw.mp3", "D1 FM Sweep Sin.mp3", "D1 FM Sweep Tri.mp3", "D1 FM Tri.mp3",
+  "Bb4 PWM 0.95 Sweep.mp3", "Bb4 PWM 0.95.mp3", "Bb4 PWM 1.45 Sweep.mp3", "Bb4 PWM 1.45.mp3", "Bb4 PWM 2.8 Sweep.mp3", "Bb4 PWM 2.8.mp3",
+  "C3 PWM 0.95 Sweep.mp3", "C3 PWM 0.95.mp3", "C3 PWM 1.45 Sweep.mp3", "C3 PWM 1.45.mp3", "C3 PWM 2.8 Sweep.mp3", "C3 PWM 2.8.mp3",
+  "D1 PWM 0.95 Sweep.mp3", "D1 PWM 0.95.mp3", "D1 PWM 1.45 Sweep.mp3", "D1 PWM 1.45.mp3", "D1 PWM 2.8 Sweep.mp3", "D1 PWM 2.8.mp3"
 ];
 
 function preload() {
@@ -34,11 +37,11 @@ function setup() {
 
   // Title
   textSize(36);
-  text("Waveform AM/FM Practice", width/2, height/9);
+  text("Waveform AM/FM/PWM Practice", width/2, height/9);
 
   // Subtitle
   textSize(20);
-  text("AM = Amplitude Modulation, FM = Frequency Modulation", width/2, height/9 + 40);
+  text("AM = Amplitude Modulation, FM = Frequency Modulation, PWM = Pulse Width Modulation", width/2, height/9 + 40);
 
   // Layout variables
   let rowH = 60;
@@ -127,8 +130,9 @@ function chooseSound() {
 
   player = sounds[choice];
 
-  // Set fileName to AM or FM based on the filename
+  // Determine AM/FM/PWM based on filename
   if (files[choice].includes("AM")) fileName = "AM";
   else if (files[choice].includes("FM")) fileName = "FM";
+  else if (files[choice].includes("PWM")) fileName = "PWM";
   else fileName = "Unknown";
 }
